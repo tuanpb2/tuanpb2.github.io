@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <input id="soA" type="text" placeholder="Nhập số a" required>
+        <br>
+        <br>
+        <input id="soB" type="text" placeholder="Nhập số b" required>
+        <br>
+        <p>chọn phép tính: </p>
+        <input type="button" value="+" onclick="toanTu('+')">
+        <input type="button" value="-" onclick="toanTu('-')">
+        <input type="button" value="x" onclick="toanTu('x')">
+        <input type="button" value=":" onclick="toanTu(':')">
+        <br>
+        <br>
+        <button type="button" onclick="tinhToan()">=</button>
+        <input type="text" id="ketQua">
+    </form>
+
+    <script >
+        var a = null;
+        var b = null;
+        var o = null;
+        var tong = 0;
+
+        // lấy toán tử rồi gán cho o;
+        function toanTu(x) {
+            o = x;
+           if(o===null){
+               return false;
+           }else{
+               return true;
+           }
+        }
+        // gọi hàm quayLai() sau khi mình tính xong sẽ k lưu lại số ở ô nhập nữa
+        function quayLai() {
+            a = document.getElementById('soA').value = null;
+            b = document.getElementById('soB').value = null;
+             o = null;
+
+        }
+        // hàm Number.isFinite(truyền vào 1 số hoặc 1 biến) dùng để kiểm tra số 
+        function layGiaTri() {
+            a = document.getElementById('soA').value;
+            b = document.getElementById('soB').value;
+            a = parseFloat(a);
+            b = parseFloat(b);
+            if(Number.isFinite(a)=== false || Number.isFinite(b) === false){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        function tinhToan() {
+            layGiaTri();
+            if(toanTu(o)===false || layGiaTri()==false){
+                document.getElementById('ketQua').value = `vui lòng nhập đủ thông tin`;
+                quayLai();
+            }else{
+                switch (o) {
+                case "+":
+                    tong = a + b;
+                    break;
+                case "-":
+                    tong = a - b;
+                    break;
+                case "x":
+                    tong = a * b;
+                    break;
+                case ":":
+                    tong = a / b;
+                    break;
+            }
+            document.getElementById('ketQua').value = `${a} ${o} ${b} = ${tong}`;
+            quayLai();
+            }
+            
+        }
+
+
+
+    </script>
+</body>
+
+</html>
